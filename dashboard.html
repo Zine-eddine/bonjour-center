@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LIÈGE | Console Directeur Général & Supervision Chantiers</title>
+
+  <!-- Google Fonts: Syne + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css">
+
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- Background Cyber Aurora & Dynamic Glows -->
+  <div class="dash-bg">
+    <div class="dash-orb dash-orb-1"></div>
+    <div class="dash-orb dash-orb-2"></div>
+    <div class="dash-orb dash-orb-3"></div>
+    <div class="dash-grid"></div>
+  </div>
+
+  <!-- Top Navigation Header -->
+  <header class="top-bar">
+    <div class="brand-group">
+      <div class="brand-badge-l">L</div>
+      <div class="brand-texts">
+        <h1 class="brand-name">LIÈGE <span>IMMOBILIER</span></h1>
+        <p class="brand-status">SUPERVISION CHANTIERS &middot; PORTAIL DIRECTEUR</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- Live Date & Clock -->
+      <div class="time-chip">
+        <i class="ph-fill ph-clock"></i>
+        <span id="liveClock">--:--:--</span>
+      </div>
+
+      <!-- Quick Budget Injection Modal Trigger -->
+      <button class="action-btn-primary" id="openAddBudgetModal">
+        <i class="ph-bold ph-plus-circle"></i>
+        <span>Allouer Budget</span>
+      </button>
+
+      <!-- Theme Switcher -->
+      <button class="icon-chip" id="dashThemeToggle" title="Changer le Thème">
+        <i class="ph ph-moon" id="dashThemeIcon"></i>
+      </button>
+
+      <!-- Director Profile Pill -->
+      <div class="director-pill">
+        <div class="director-avatar">
+          <i class="ph-fill ph-user-gear"></i>
+          <span class="live-dot"></span>
+        </div>
+        <div class="director-details">
+          <span class="director-name">Directeur Général</span>
+          <span class="director-role">admin@liege.com</span>
+        </div>
+        <button class="logout-btn" id="logoutBtn" title="Déconnexion">
+          <i class="ph ph-sign-out"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Container -->
+  <main class="dashboard-shell">
+
+    <!-- KPI Metrics Top Row -->
+    <section class="kpi-grid">
+      <div class="kpi-card glass-glow">
+        <div class="kpi-head">
+          <span class="kpi-title">BUDGET TOTAL ALLOUÉ</span>
+          <span class="kpi-icon-box cyan"><i class="ph-bold ph-wallet"></i></span>
+        </div>
+        <div class="kpi-value" id="kpiTotalAllocated">1,200,000 DZD</div>
+        <div class="kpi-sub">Transféré aux 2 chefs de projet</div>
+      </div>
+
+      <div class="kpi-card glass-glow">
+        <div class="kpi-head">
+          <span class="kpi-title">ACHATS MATÉRIAUX (DÉPENSES)</span>
+          <span class="kpi-icon-box orange"><i class="ph-bold ph-shopping-cart"></i></span>
+        </div>
+        <div class="kpi-value" id="kpiMaterialsSpent">540,000 DZD</div>
+        <div class="kpi-sub">Ciment, Briques, Ferraille, Outillage</div>
+      </div>
+
+      <div class="kpi-card glass-glow">
+        <div class="kpi-head">
+          <span class="kpi-title">PAIEMENTS OUVRIERS (JOURNÉES)</span>
+          <span class="kpi-icon-box purple"><i class="ph-bold ph-hand-coins"></i></span>
+        </div>
+        <div class="kpi-value" id="kpiWorkerPayouts">380,000 DZD</div>
+        <div class="kpi-sub">Versés en direct aux ouvriers</div>
+      </div>
+
+      <div class="kpi-card glass-glow">
+        <div class="kpi-head">
+          <span class="kpi-title">TRÉSORERIE RESTANTE CHANTIER</span>
+          <span class="kpi-icon-box emerald"><i class="ph-bold ph-vault"></i></span>
+        </div>
+        <div class="kpi-value highlight-emerald" id="kpiRemainingBudget">280,000 DZD</div>
+        <div class="kpi-sub">Disponible chez les 2 chefs de projet</div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Les Deux Responsables (Chefs de Projet) -->
+    <section class="supervision-section">
+      <div class="section-title-row">
+        <div>
+          <h2 class="section-title"><i class="ph-fill ph-users-four"></i> Les Deux Responsables de Chantier</h2>
+          <p class="section-desc">Suivi détaillé de l'argent confié par le directeur, dépenses matériaux et salaires ouvriers.</p>
+        </div>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all">Tous (2)</button>
+          <button class="pill" data-filter="resp1">Mourad (Chantier A)</button>
+          <button class="pill" data-filter="resp2">Yacine (Chantier B)</button>
+        </div>
+      </div>
+
+      <div class="responsables-grid" id="responsablesContainer">
+        <!-- Responsable 1 -->
+        <article class="resp-card glass-glow" id="card-resp1">
+          <div class="resp-header">
+            <div class="resp-info">
+              <div class="resp-avatar-box">
+                <span class="avatar-initials">MR</span>
+                <span class="badge-status online"></span>
+              </div>
+              <div>
+                <h3 class="resp-name">Mourad Rahmani</h3>
+                <span class="resp-zone"><i class="ph-fill ph-hard-hat"></i> Responsable Chantier A (Résidence Liège)</span>
+              </div>
+            </div>
+            <button class="add-funds-btn" onclick="openBudgetModalFor('resp1', 'Mourad Rahmani')">
+              <i class="ph-bold ph-plus"></i> Allouer
+            </button>
+          </div>
+
+          <!-- Financial Flow Summary -->
+          <div class="budget-progress-box">
+            <div class="budget-labels">
+              <span>Utilisation du budget: <strong>72.5%</strong></span>
+              <span>Reste: <strong class="text-emerald" id="resp1-remaining">165,000 DZD</strong></span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: 72.5%; background: linear-gradient(90deg, #38bdf8, #10b981);"></div>
+            </div>
+          </div>
+
+          <!-- Micro Stats -->
+          <div class="resp-financial-row">
+            <div class="resp-stat">
+              <span class="label">Sward Reçus (Directeur)</span>
+              <span class="val text-cyan" id="resp1-received">600,000 DZD</span>
+            </div>
+            <div class="resp-stat">
+              <span class="label">Sl3a (Matériaux)</span>
+              <span class="val text-orange" id="resp1-materials">260,000 DZD</span>
+            </div>
+            <div class="resp-stat">
+              <span class="label">Paye Khadama</span>
+              <span class="val text-purple" id="resp1-payouts">175,000 DZD</span>
+            </div>
+          </div>
+
+          <!-- Quick Sub-Actions Tabs -->
+          <div class="resp-actions-tabs">
+            <button class="tab-btn active" onclick="switchRespTab(this, 'resp1-sl3a')">Matériaux Achetés (<span id="resp1-sl3a-count">3</span>)</button>
+            <button class="tab-btn" onclick="switchRespTab(this, 'resp1-paye')">Paiements Ouvriers (<span id="resp1-paye-count">4</span>)</button>
+          </div>
+
+          <!-- Content Panels -->
+          <div class="tab-content" id="resp1-sl3a">
+            <div class="history-list" id="resp1-sl3a-list">
+              <!-- Sl3a Item -->
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Ciment Lafarge Chiffa (80 Sacs)</span>
+                  <span class="item-meta">Facture #4102 &bull; Quincaillerie Moderne &bull; 08:30</span>
+                </div>
+                <span class="item-price">- 68,000 DZD</span>
+              </div>
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Briques Rouges 8 Trous (1200 U)</span>
+                  <span class="item-meta">Briqueterie de l'Est &bull; 11:15</span>
+                </div>
+                <span class="item-price">- 72,000 DZD</span>
+              </div>
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Fer à béton FeE500 (1.5 Tonnes)</span>
+                  <span class="item-meta">Dépôt Métaux &bull; Hier</span>
+                </div>
+                <span class="item-price">- 120,000 DZD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content hidden" id="resp1-paye">
+            <div class="history-list" id="resp1-paye-list">
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Karim Bensalem (Coffreur)</span>
+                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:30</span>
+                </div>
+                <span class="item-price payout">- 45,000 DZD</span>
+              </div>
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Farid Touati (Ferrailleur)</span>
+                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:35</span>
+                </div>
+                <span class="item-price payout">- 50,000 DZD</span>
+              </div>
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Youcef M. & Ahmed K. (Manœuvres)</span>
+                  <span class="item-meta">2 journées complètes &bull; 17:40</span>
+                </div>
+                <span class="item-price payout">- 80,000 DZD</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Responsable 2 -->
+        <article class="resp-card glass-glow" id="card-resp2">
+          <div class="resp-header">
+            <div class="resp-info">
+              <div class="resp-avatar-box orange">
+                <span class="avatar-initials">YB</span>
+                <span class="badge-status online"></span>
+              </div>
+              <div>
+                <h3 class="resp-name">Yacine Belkacem</h3>
+                <span class="resp-zone"><i class="ph-fill ph-hard-hat"></i> Responsable Chantier B (Tour Annaba)</span>
+              </div>
+            </div>
+            <button class="add-funds-btn" onclick="openBudgetModalFor('resp2', 'Yacine Belkacem')">
+              <i class="ph-bold ph-plus"></i> Allouer
+            </button>
+          </div>
+
+          <div class="budget-progress-box">
+            <div class="budget-labels">
+              <span>Utilisation du budget: <strong>80.8%</strong></span>
+              <span>Reste: <strong class="text-emerald" id="resp2-remaining">115,000 DZD</strong></span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill orange-grad" style="width: 80.8%;"></div>
+            </div>
+          </div>
+
+          <div class="resp-financial-row">
+            <div class="resp-stat">
+              <span class="label">Sward Reçus (Directeur)</span>
+              <span class="val text-cyan" id="resp2-received">600,000 DZD</span>
+            </div>
+            <div class="resp-stat">
+              <span class="label">Sl3a (Matériaux)</span>
+              <span class="val text-orange" id="resp2-materials">280,000 DZD</span>
+            </div>
+            <div class="resp-stat">
+              <span class="label">Paye Khadama</span>
+              <span class="val text-purple" id="resp2-payouts">205,000 DZD</span>
+            </div>
+          </div>
+
+          <div class="resp-actions-tabs">
+            <button class="tab-btn active" onclick="switchRespTab(this, 'resp2-sl3a')">Matériaux Achetés (<span id="resp2-sl3a-count">3</span>)</button>
+            <button class="tab-btn" onclick="switchRespTab(this, 'resp2-paye')">Paiements Ouvriers (<span id="resp2-paye-count">3</span>)</button>
+          </div>
+
+          <div class="tab-content" id="resp2-sl3a">
+            <div class="history-list" id="resp2-sl3a-list">
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Sable Oued Souf (2 Camions 16m³)</span>
+                  <span class="item-meta">Carrière Nord &bull; 09:00</span>
+                </div>
+                <span class="item-price">- 90,000 DZD</span>
+              </div>
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Gravier Concassé 15/25 (1 Camion)</span>
+                  <span class="item-meta">Carrière Nord &bull; 10:45</span>
+                </div>
+                <span class="item-price">- 45,000 DZD</span>
+              </div>
+              <div class="history-item">
+                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Tubes PVC & Raccords Assainissement</span>
+                  <span class="item-meta">Sanitaire Plus &bull; 14:20</span>
+                </div>
+                <span class="item-price">- 145,000 DZD</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content hidden" id="resp2-paye">
+            <div class="history-list" id="resp2-paye-list">
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Sofiane Hamidi (Maçon Chef)</span>
+                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:15</span>
+                </div>
+                <span class="item-price payout">- 65,000 DZD</span>
+              </div>
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Amine Zitouni (Plâtrier)</span>
+                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:25</span>
+                </div>
+                <span class="item-price payout">- 60,000 DZD</span>
+              </div>
+              <div class="history-item payout">
+                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
+                <div class="item-main">
+                  <span class="item-title">Groupe Échafaudeurs (3 ouvriers)</span>
+                  <span class="item-meta">Forfait montage &bull; 18:00</span>
+                </div>
+                <span class="item-price payout">- 80,000 DZD</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Pointage & Présence des Ouvriers (Houdour w Ghiyab) -->
+    <section class="attendance-section">
+      <div class="section-title-row">
+        <div>
+          <h2 class="section-title"><i class="ph-fill ph-calendar-check"></i> Registre de Pointage & Présence (Houdour w Ghiyab)</h2>
+          <p class="section-desc">Visualisation créative du pointage par ouvrier, chantier affecté, heure d'entrée et statut de présence.</p>
+        </div>
+
+        <div class="attendance-stats-summary">
+          <span class="att-badge pres"><i class="ph-bold ph-check"></i> Présents: <strong id="countPresents">14</strong></span>
+          <span class="att-badge abs"><i class="ph-bold ph-x"></i> Absents: <strong id="countAbsents">2</strong></span>
+          <span class="att-badge late"><i class="ph-bold ph-clock-countdown"></i> Retards: <strong id="countLates">1</strong></span>
+        </div>
+      </div>
+
+      <!-- Attendance Interactive Grid -->
+      <div class="attendance-card glass-glow">
+        <div class="attendance-toolbar">
+          <div class="search-box">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" id="workerSearch" placeholder="Rechercher un ouvrier, métier ou chantier...">
+          </div>
+          <div class="filter-actions">
+            <button class="att-filter-btn active" data-status="all">Tous (17)</button>
+            <button class="att-filter-btn" data-status="present">Présents</button>
+            <button class="att-filter-btn" data-status="absent">Absents</button>
+            <button class="quick-add-worker-btn" id="openAddWorkerModal">
+              <i class="ph-bold ph-user-plus"></i> Nouveau Pointage
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="creative-table">
+            <thead>
+              <tr>
+                <th>Ouvrier (Khadam)</th>
+                <th>Spécialité / Métier</th>
+                <th>Chantier & Responsable</th>
+                <th>Heure d'Arrivée</th>
+                <th>Statut Présence</th>
+                <th>Gain Journalier</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTableBody">
+              <!-- Dynamically Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL 1: Allouer du Budget (Sward) aux Responsables -->
+  <div class="modal-backdrop" id="budgetModal">
+    <div class="modal-card glass-glow">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="ph-bold ph-money"></i> Allouer des Fonds au Responsable</h3>
+        <button class="modal-close" onclick="closeModal('budgetModal')"><i class="ph ph-x"></i></button>
+      </div>
+      <form id="budgetForm" class="modal-form">
+        <div class="form-group">
+          <label>Sélectionner le Responsable</label>
+          <select id="modalRespSelect" required>
+            <option value="resp1">Mourad Rahmani (Chantier A - Résidence Liège)</option>
+            <option value="resp2">Yacine Belkacem (Chantier B - Tour Annaba)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Montant à Transférer (DZD)</label>
+          <input type="number" id="modalAmount" placeholder="Ex: 150000" min="1000" step="1000" required>
+        </div>
+        <div class="form-group">
+          <label>Motif / Note pour les dépenses</label>
+          <input type="text" id="modalNote" placeholder="Ex: Tranche pour achat ciment et salaires du samedi" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('budgetModal')">Annuler</button>
+          <button type="submit" class="btn-primary">Confirmer l'Allocation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Ajouter Pointage Ouvrier -->
+  <div class="modal-backdrop" id="workerModal">
+    <div class="modal-card glass-glow">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="ph-bold ph-user-plus"></i> Enregistrer Pointage Ouvrier</h3>
+        <button class="modal-close" onclick="closeModal('workerModal')"><i class="ph ph-x"></i></button>
+      </div>
+      <form id="workerForm" class="modal-form">
+        <div class="form-group">
+          <label>Nom et Prénom de l'ouvrier</label>
+          <input type="text" id="newWorkerName" placeholder="Ex: Bilal Cherif" required>
+        </div>
+        <div class="form-group">
+          <label>Métier / Fonction</label>
+          <input type="text" id="newWorkerRole" placeholder="Ex: Électricien, Maçon, Manœuvre" required>
+        </div>
+        <div class="form-group">
+          <label>Chantier & Chef assigné</label>
+          <select id="newWorkerChantier" required>
+            <option value="Chantier A (Mourad)">Chantier A (Mourad Rahmani)</option>
+            <option value="Chantier B (Yacine)">Chantier B (Yacine Belkacem)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Statut</label>
+          <select id="newWorkerStatus" required>
+            <option value="present">Présent (Hader)</option>
+            <option value="late">En retard</option>
+            <option value="absent">Absent (Ghayeb)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Rémunération de la journée (DZD)</label>
+          <input type="number" id="newWorkerPay" placeholder="Ex: 3500" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('workerModal')">Annuler</button>
+          <button type="submit" class="btn-primary">Enregistrer le Pointage</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div class="dash-toast" id="dashToast">
+    <i class="ph-fill ph-check-circle" id="dashToastIcon"></i>
+    <div class="dash-toast-body">
+      <h5 id="dashToastTitle">Opération Réussie</h5>
+      <p id="dashToastMsg">Budget transféré avec succès.</p>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

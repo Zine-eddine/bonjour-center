@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LIÈGE | Portail Immobilier Exclusif</title>
+  
+  <!-- Modern Typography: Syne (Ultra-luxurious display) + Plus Jakarta Sans (Clean tech) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons: Ultra-clean modern icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Interactive Dynamic Mesh / Aurora Canvas -->
+  <div class="interactive-bg">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="noise-overlay"></div>
+    <div class="cyber-grid"></div>
+  </div>
+
+  <!-- Top Floating Status Bar -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span class="brand-monogram">L</span>
+      <span class="brand-nav-title">LIÈGE <span>IMMOBILIER</span></span>
+    </div>
+    
+    <div class="nav-controls">
+      <!-- Live Server / Connection status -->
+      <div class="live-status">
+        <span class="status-radar"></span>
+        <span class="status-label">Réseau Sécurisé</span>
+      </div>
+      
+      <!-- Theme switcher: Dark / Light Cyber -->
+      <button class="theme-toggle-btn" id="themeToggle" aria-label="Changer le thème">
+        <i class="ph ph-moon" id="themeIcon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Master App Container -->
+  <div class="app-viewport">
+    
+    <!-- Hero / Split Showcase (Visible on Tablet & PC, elegant banner on Phone) -->
+    <aside class="showcase-panel">
+      <div class="showcase-content">
+        <div class="tag-pill">
+          <i class="ph-fill ph-sparkle"></i> ARCHITECTURE & LUXE
+        </div>
+        
+        <h2 class="showcase-heading">
+          L'immobilier liégeois,<br>
+          <span class="gradient-text">réinventé avec passion.</span>
+        </h2>
+        
+        <p class="showcase-desc">
+          Accédez à votre espace investisseur privé. Visualisez l'état d'avancement de vos chantiers, les transactions et vos acquisitions en temps réel.
+        </p>
+
+        <!-- Dynamic Real Estate Stats Widget -->
+        <div class="stats-glass-row">
+          <div class="stat-card">
+            <span class="stat-num" data-counter="48">48+</span>
+            <span class="stat-lbl">Projets en cours</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">99.8%</span>
+            <span class="stat-lbl">Conformité audit</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">Liège &middot; Annaba</span>
+            <span class="stat-lbl">Double pôle d'expertise</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Authentication Portal (Ultra Modern Cyber-Glass Card) -->
+    <main class="login-wrapper">
+      <div class="neo-card" id="neoCard">
+        
+        <!-- Animated Corner Highlights -->
+        <div class="card-glow-corner"></div>
+        <div class="card-border-gradient"></div>
+
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="portal-badge">
+            <i class="ph-fill ph-shield-check"></i>
+            <span>PORTAIL EXCLUSIF</span>
+          </div>
+          <h1 class="card-title">Bienvenue</h1>
+          <p class="card-subtitle">Connectez-vous pour accéder à votre console de gestion</p>
+        </div>
+
+        <!-- Social / Instant Access Buttons -->
+        <div class="fast-auth-row">
+          <button type="button" class="fast-btn" id="biometricBtn" title="Connexion Empreinte / FaceID">
+            <i class="ph ph-fingerprint"></i>
+            <span>Touch / Face ID</span>
+          </button>
+          <button type="button" class="fast-btn" id="ssoBtn" title="Accès Partenaire Entreprise">
+            <i class="ph ph-key"></i>
+            <span>Clé Partenaire</span>
+          </button>
+        </div>
+
+        <div class="separator">
+          <span>OU VIA IDENTIFIANTS</span>
+        </div>
+
+        <!-- Modern Reactive Form -->
+        <form id="authForm" class="auth-form" autocomplete="off" novalidate>
+          
+          <!-- Field 1: Email -->
+          <div class="neo-field" id="fieldEmail">
+            <div class="field-top-row">
+              <label for="userEmail">Adresse e-mail</label>
+              <span class="field-hint" id="emailHint">ex: client@liege.be</span>
+            </div>
+            <div class="input-shell">
+              <span class="input-icon-box">
+                <i class="ph ph-at"></i>
+              </span>
+              <input 
+                type="email" 
+                id="userEmail" 
+                name="email" 
+                placeholder="nom@exemple.com" 
+                required 
+                spellcheck="false"
+              />
+              <span class="validation-pill" id="emailStatus">
+                <i class="ph ph-check-circle"></i>
+              </span>
+            </div>
+            <span class="error-tip" id="emailErrorMsg">Adresse mail requise</span>
+          </div>
+
+          <!-- Field 2: Password with Strength Meter -->
+          <div class="neo-field" id="fieldPassword">
+            <div class="field-top-row">
+              <label for="userPassword">Mot de passe secret</label>
+              <a href="#" class="inline-forgot-link" id="btnForgot">Oublié ?</a>
+            </div>
+            <div class="input-shell">
+              <span class="input-icon-box">
+                <i class="ph ph-lock-key"></i>
+              </span>
+              <input 
+                type="password" 
+                id="userPassword" 
+                name="password" 
+                placeholder="••••••••••••" 
+                required 
+              />
+              <button type="button" class="toggle-eye" id="togglePass" aria-label="Voir mot de passe">
+                <i class="ph ph-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+            
+            <!-- Realtime dynamic strength meter bar -->
+            <div class="strength-meter" id="strengthMeter">
+              <div class="meter-bar"><span class="bar-fill" id="meterFill"></span></div>
+              <span class="meter-text" id="meterText">Sécurité</span>
+            </div>
+            <span class="error-tip" id="passwordErrorMsg">Mot de passe manquant</span>
+          </div>
+
+          <!-- Quick Switches -->
+          <div class="form-switches">
+            <label class="ios-switch">
+              <input type="checkbox" id="keepSession" checked>
+              <span class="slider"></span>
+              <span class="switch-title">Maintenir la session</span>
+            </label>
+          </div>
+
+          <!-- Futuristic Action Button -->
+          <button type="submit" class="cyber-btn" id="loginBtn">
+            <span class="btn-shine"></span>
+            <span class="btn-content">
+              <span class="btn-text">Entrer dans l'espace</span>
+              <i class="ph ph-arrow-up-right btn-arrow"></i>
+            </span>
+            <div class="cyber-spinner" id="btnSpinner"></div>
+          </button>
+        </form>
+
+        <!-- Security / Geolocation Proof Footer -->
+        <div class="card-footer-info">
+          <div class="geo-badge">
+            <i class="ph-fill ph-map-pin"></i> Liège, BE &bull; Annaba, DZ
+          </div>
+          <div class="security-chip">
+            <i class="ph-fill ph-lock-simple"></i> TLS 1.3 / E2EE
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Interactive Floating HUD Notification (Toast) -->
+  <div class="hud-toast" id="hudToast">
+    <div class="hud-icon-box">
+      <i class="ph-fill ph-check-circle" id="toastIcon"></i>
+    </div>
+    <div class="hud-body">
+      <h4 class="hud-title" id="toastTitle">Notification</h4>
+      <p class="hud-desc" id="toastDesc">Action enregistrée avec succès.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
