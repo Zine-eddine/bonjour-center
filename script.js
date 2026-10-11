@@ -181,30 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Check Specific Director Credentials requested by user: admin@liege.com / admin
-    const isAdmin = (emailVal.toLowerCase() === 'admin@liege.com' && passVal === 'admin');
-
-    // Simulated Authentication Request
-    loginBtn.classList.add('is-loading');
-    loginBtn.disabled = true;
-
+    // Always redirect to dashboard.html smoothly
     try {
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 600));
       loginBtn.classList.remove('is-loading');
       loginBtn.disabled = false;
 
-      if (isAdmin) {
-        showHUDToast('Accès Directeur Confirmé', 'Bienvenue M. le Directeur Général...', false);
-        setTimeout(() => {
-          window.location.href = 'dashboard.html';
-        }, 1000);
-      } else {
-        showHUDToast('Accès Autorisé', `Bienvenue sur le portail LIÈGE (${emailVal})`, false);
-      }
+      showHUDToast('Accès Autorisé', 'Redirection vers le tableau de bord...', false);
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 700);
     } catch (err) {
       loginBtn.classList.remove('is-loading');
       loginBtn.disabled = false;
-      showHUDToast('Erreur Réseau', 'Impossible de se connecter au serveur.', true);
+      showHUDToast('Erreur', 'Erreur de redirection', true);
     }
   });
 

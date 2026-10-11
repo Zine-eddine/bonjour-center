@@ -971,16 +971,178 @@ body {
 .dash-toast h5 { font-size: 0.88rem; font-weight: 700; }
 .dash-toast p { font-size: 0.78rem; color: var(--text-muted); }
 
-/* Responsive adjustments */
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATIONS FOR MOBILE (PORTABLE) & TABLETS
+   ========================================================================== */
 @media (max-width: 1100px) {
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .responsables-grid { grid-template-columns: 1fr; }
+  .top-bar { padding: 14px 24px; }
+  .dashboard-shell { padding: 20px 20px 50px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .responsables-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
 @media (max-width: 768px) {
-  .top-bar { padding: 14px 20px; }
-  .dashboard-shell { padding: 20px 16px 40px; }
-  .kpi-grid { grid-template-columns: 1fr; }
-  .brand-status, .time-chip { display: none; }
-  .director-details { display: none; }
+  .top-bar {
+    padding: 12px 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .brand-group {
+    gap: 10px;
+  }
+
+  .brand-badge-l {
+    width: 36px;
+    height: 36px;
+    font-size: 1.15rem;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  .brand-status, .time-chip {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 10px;
+    margin-left: auto;
+  }
+
+  .action-btn-primary {
+    padding: 7px 14px;
+    font-size: 0.78rem;
+  }
+
+  .action-btn-primary span {
+    display: none; /* Icon only on small screens */
+  }
+
+  .action-btn-primary::after {
+    content: 'Budget';
+    font-size: 0.78rem;
+  }
+
+  .director-pill {
+    padding: 4px 8px;
+    gap: 8px;
+  }
+
+  .director-details {
+    display: none; /* Hide long email on mobile so logout is clear */
+  }
+
+  .director-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+
+  .logout-btn {
+    font-size: 1.25rem;
+    padding: 4px;
+    color: var(--accent-rose);
+    display: flex;
+    align-items: center;
+  }
+
+  .dashboard-shell {
+    padding: 16px 12px 60px;
+    gap: 24px;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .kpi-card {
+    padding: 18px 16px;
+  }
+
+  .kpi-value {
+    font-size: 1.45rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .section-title-row {
+    margin-bottom: 14px;
+  }
+
+  .filter-pills {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filter-pills .pill {
+    padding: 6px 10px;
+    font-size: 0.74rem;
+  }
+
+  .resp-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .resp-name {
+    font-size: 1.1rem;
+  }
+
+  .resp-financial-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .resp-stat {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .resp-actions-tabs {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tab-btn {
+    font-size: 0.76rem;
+    padding: 4px 8px;
+  }
+
+  .attendance-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .filter-actions {
+    flex-wrap: wrap;
+  }
+
+  .attendance-stats-summary {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .att-badge {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.72rem;
+    padding: 6px 8px;
+  }
+
+  .creative-table th, .creative-table td {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+  }
 }
+
