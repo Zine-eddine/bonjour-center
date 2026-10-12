@@ -7,7 +7,8 @@
  */
 
 // Initial Mock State
-const state = {
+// Initial Mock State
+let state = {
   responsables: {
     resp1: {
       name: "Mourad Rahmani",
@@ -53,6 +54,31 @@ const state = {
   ]
 };
 
+// Async Database Synchronization
+async function syncDatabase() {
+  if (typeof DB !== 'undefined') {
+    state = await DB.getData('main_state', state);
+    renderKPIs();
+    renderAttendanceTable();
+
+    // Subscribe to live cloud updates
+    DB.subscribe('main_state', (updated) => {
+      if (updated) {
+        state = updated;
+        renderKPIs();
+        renderAttendanceTable();
+      }
+    });
+  }
+}
+
+// Save back to DB
+function persistState() {
+  if (typeof DB !== 'undefined') {
+    DB.saveData('main_state', state);
+  }
+}
+
 // DOM Ready with error safety
 document.addEventListener('DOMContentLoaded', () => {
   try { initTheme(); } catch (e) { console.warn(e); }
@@ -60,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try { renderKPIs(); } catch (e) { console.warn(e); }
   try { renderAttendanceTable(); } catch (e) { console.warn(e); }
   try { setupEventListeners(); } catch (e) { console.warn(e); }
+  try { syncDatabase(); } catch (e) { console.warn(e); }
 });
 
 // 1. Live Clock
@@ -225,6 +252,7 @@ window.toggleWorkerStatus = function(id) {
   }
 
   renderAttendanceTable();
+  persistState();
   showToast('Pointage Mis à Jour', `Statut de ${worker.name} modifié.`);
 };
 
@@ -313,6 +341,7 @@ function setupEventListeners() {
     if (amount > 0) {
       state.responsables[respKey].received += amount;
       renderKPIs();
+      persistState();
       closeModal('budgetModal');
       e.target.reset();
       showToast('Allocation Validée', `${formatDZD(amount)} transférés à ${state.responsables[respKey].name}. Note: "${note}"`);
@@ -340,6 +369,7 @@ function setupEventListeners() {
 
     state.workers.unshift(newWorker);
     renderAttendanceTable();
+    persistState();
     closeModal('workerModal');
     e.target.reset();
     showToast('Ouvrier Enregistré', `Pointage de ${name} validé.`);

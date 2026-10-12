@@ -61,16 +61,48 @@ if (currentRespKey !== 'mourad' && currentRespKey !== 'yacine') currentRespKey =
 
 let currentData = defaultData[currentRespKey];
 
-document.addEventListener('DOMContentLoaded', () => {
-  initProfile();
-  initClock();
-  initTheme();
+// Async Cloud DB Synchronization
+async function syncRespDatabase() {
+  if (typeof DB !== 'undefined') {
+    const cloudAll = await DB.getData('resp_data', defaultData);
+    if (cloudAll && cloudAll[currentRespKey]) {
+      defaultData = cloudAll;
+      currentData = defaultData[currentRespKey];
+      refreshUI();
+    }
+
+    DB.subscribe('resp_data', (updatedAll) => {
+      if (updatedAll && updatedAll[currentRespKey]) {
+        defaultData = updatedAll;
+        currentData = defaultData[currentRespKey];
+        refreshUI();
+      }
+    });
+  }
+}
+
+function persistRespState() {
+  if (typeof DB !== 'undefined') {
+    defaultData[currentRespKey] = currentData;
+    DB.saveData('resp_data', defaultData);
+  }
+}
+
+function refreshUI() {
   renderWallet();
   renderMaterials();
   renderPayouts();
   renderAttendance();
   populateDropdowns();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initProfile();
+  initClock();
+  initTheme();
+  refreshUI();
   setupEvents();
+  syncRespDatabase();
 });
 
 // 1. Profile Setup
@@ -214,6 +246,7 @@ window.cycleStatus = function(workerId) {
   }
 
   renderAttendance();
+  persistRespState();
   showToast('Pointage Modifié', `${worker.name} est maintenant marqué comme ${worker.status}.`);
 };
 
@@ -285,6 +318,7 @@ function setupEvents() {
 
     renderWallet();
     renderMaterials();
+    persistRespState();
     closeModal('modalAchat');
     e.target.reset();
     showToast('Achat Enregistré', `${formatDZD(amount)} déduits de la caisse pour: ${title}`);
@@ -310,6 +344,7 @@ function setupEvents() {
 
     renderWallet();
     renderPayouts();
+    persistRespState();
     closeModal('modalPaye');
     e.target.reset();
     showToast('Paiement Validé', `${formatDZD(amount)} versés à ${worker}`);
@@ -327,6 +362,7 @@ function setupEvents() {
       worker.status = status;
       worker.time = status === 'absent' ? '--:--' : time;
       renderAttendance();
+      persistRespState();
       closeModal('modalPointage');
       showToast('Pointage Réussi', `Présence de ${worker.name} enregistrée à ${time}`);
     }
