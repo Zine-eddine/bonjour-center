@@ -122,8 +122,8 @@
         </div>
         <div class="filter-pills">
           <button class="pill active" data-filter="all">Tous (2)</button>
-          <button class="pill" data-filter="resp1">Mourad (Chantier A)</button>
-          <button class="pill" data-filter="resp2">Yacine (Chantier B)</button>
+          <button class="pill" data-filter="resp1">Naoufel (Chantier A)</button>
+          <button class="pill" data-filter="resp2">Hani (Chantier B)</button>
         </div>
       </div>
 
@@ -133,15 +133,15 @@
           <div class="resp-header">
             <div class="resp-info">
               <div class="resp-avatar-box">
-                <span class="avatar-initials">MR</span>
+                <span class="avatar-initials">MN</span>
                 <span class="badge-status online"></span>
               </div>
               <div>
-                <h3 class="resp-name">Mourad Rahmani</h3>
+                <h3 class="resp-name">Meddeb Naoufel</h3>
                 <span class="resp-zone"><i class="ph-fill ph-hard-hat"></i> Responsable Chantier A (Résidence Liège)</span>
               </div>
             </div>
-            <button class="add-funds-btn" onclick="openBudgetModalFor('resp1', 'Mourad Rahmani')">
+            <button class="add-funds-btn" onclick="openBudgetModalFor('naoufel')">
               <i class="ph-bold ph-plus"></i> Allouer
             </button>
           </div>
@@ -182,78 +182,31 @@
           <!-- Content Panels -->
           <div class="tab-content" id="resp1-sl3a">
             <div class="history-list" id="resp1-sl3a-list">
-              <!-- Sl3a Item -->
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Ciment Lafarge Chiffa (80 Sacs)</span>
-                  <span class="item-meta">Facture #4102 &bull; Quincaillerie Moderne &bull; 08:30</span>
-                </div>
-                <span class="item-price">- 68,000 DZD</span>
-              </div>
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Briques Rouges 8 Trous (1200 U)</span>
-                  <span class="item-meta">Briqueterie de l'Est &bull; 11:15</span>
-                </div>
-                <span class="item-price">- 72,000 DZD</span>
-              </div>
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Fer à béton FeE500 (1.5 Tonnes)</span>
-                  <span class="item-meta">Dépôt Métaux &bull; Hier</span>
-                </div>
-                <span class="item-price">- 120,000 DZD</span>
-              </div>
+              <!-- Dynamically populated by dashboard.js renderResponsablesCards() -->
             </div>
           </div>
 
           <div class="tab-content hidden" id="resp1-paye">
             <div class="history-list" id="resp1-paye-list">
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Karim Bensalem (Coffreur)</span>
-                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:30</span>
-                </div>
-                <span class="item-price payout">- 45,000 DZD</span>
-              </div>
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Farid Touati (Ferrailleur)</span>
-                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:35</span>
-                </div>
-                <span class="item-price payout">- 50,000 DZD</span>
-              </div>
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Youcef M. & Ahmed K. (Manœuvres)</span>
-                  <span class="item-meta">2 journées complètes &bull; 17:40</span>
-                </div>
-                <span class="item-price payout">- 80,000 DZD</span>
-              </div>
+              <!-- Dynamically populated by dashboard.js renderResponsablesCards() -->
             </div>
           </div>
         </article>
 
-        <!-- Responsable 2 -->
+        <!-- Responsable 2 — Meddeb Hani -->
         <article class="resp-card glass-glow" id="card-resp2">
           <div class="resp-header">
             <div class="resp-info">
               <div class="resp-avatar-box orange">
-                <span class="avatar-initials">YB</span>
+                <span class="avatar-initials">MH</span>
                 <span class="badge-status online"></span>
               </div>
               <div>
-                <h3 class="resp-name">Yacine Belkacem</h3>
+                <h3 class="resp-name">Meddeb Hani</h3>
                 <span class="resp-zone"><i class="ph-fill ph-hard-hat"></i> Responsable Chantier B (Tour Annaba)</span>
               </div>
             </div>
-            <button class="add-funds-btn" onclick="openBudgetModalFor('resp2', 'Yacine Belkacem')">
+            <button class="add-funds-btn" onclick="openBudgetModalFor('hani')">
               <i class="ph-bold ph-plus"></i> Allouer
             </button>
           </div>
@@ -271,78 +224,32 @@
           <div class="resp-financial-row">
             <div class="resp-stat">
               <span class="label">Sward Reçus (Directeur)</span>
-              <span class="val text-cyan" id="resp2-received">600,000 DZD</span>
+              <span class="val text-cyan" id="resp2-received">900,000 DZD</span>
             </div>
             <div class="resp-stat">
               <span class="label">Sl3a (Matériaux)</span>
-              <span class="val text-orange" id="resp2-materials">280,000 DZD</span>
+              <span class="val text-orange" id="resp2-materials">402,000 DZD</span>
             </div>
             <div class="resp-stat">
               <span class="label">Paye Khadama</span>
-              <span class="val text-purple" id="resp2-payouts">205,000 DZD</span>
+              <span class="val text-purple" id="resp2-payouts">255,000 DZD</span>
             </div>
           </div>
 
           <div class="resp-actions-tabs">
-            <button class="tab-btn active" onclick="switchRespTab(this, 'resp2-sl3a')">Matériaux Achetés (<span id="resp2-sl3a-count">3</span>)</button>
-            <button class="tab-btn" onclick="switchRespTab(this, 'resp2-paye')">Paiements Ouvriers (<span id="resp2-paye-count">3</span>)</button>
+            <button class="tab-btn active" onclick="switchRespTab(this, 'resp2-sl3a')">Matériaux Achetés (<span id="resp2-sl3a-count">4</span>)</button>
+            <button class="tab-btn" onclick="switchRespTab(this, 'resp2-paye')">Paiements Ouvriers (<span id="resp2-paye-count">4</span>)</button>
           </div>
 
           <div class="tab-content" id="resp2-sl3a">
             <div class="history-list" id="resp2-sl3a-list">
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Sable Oued Souf (2 Camions 16m³)</span>
-                  <span class="item-meta">Carrière Nord &bull; 09:00</span>
-                </div>
-                <span class="item-price">- 90,000 DZD</span>
-              </div>
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Gravier Concassé 15/25 (1 Camion)</span>
-                  <span class="item-meta">Carrière Nord &bull; 10:45</span>
-                </div>
-                <span class="item-price">- 45,000 DZD</span>
-              </div>
-              <div class="history-item">
-                <div class="item-icon-tag"><i class="ph-fill ph-cube"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Tubes PVC & Raccords Assainissement</span>
-                  <span class="item-meta">Sanitaire Plus &bull; 14:20</span>
-                </div>
-                <span class="item-price">- 145,000 DZD</span>
-              </div>
+              <!-- Dynamically populated by dashboard.js renderResponsablesCards() -->
             </div>
           </div>
 
           <div class="tab-content hidden" id="resp2-paye">
             <div class="history-list" id="resp2-paye-list">
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Sofiane Hamidi (Maçon Chef)</span>
-                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:15</span>
-                </div>
-                <span class="item-price payout">- 65,000 DZD</span>
-              </div>
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Amine Zitouni (Plâtrier)</span>
-                  <span class="item-meta">Payé Cash &bull; Aujourd'hui à 17:25</span>
-                </div>
-                <span class="item-price payout">- 60,000 DZD</span>
-              </div>
-              <div class="history-item payout">
-                <div class="item-icon-tag worker"><i class="ph-fill ph-user-check"></i></div>
-                <div class="item-main">
-                  <span class="item-title">Groupe Échafaudeurs (3 ouvriers)</span>
-                  <span class="item-meta">Forfait montage &bull; 18:00</span>
-                </div>
-                <span class="item-price payout">- 80,000 DZD</span>
-              </div>
+              <!-- Dynamically populated by dashboard.js renderResponsablesCards() -->
             </div>
           </div>
         </article>
@@ -415,8 +322,8 @@
         <div class="form-group">
           <label>Sélectionner le Responsable</label>
           <select id="modalRespSelect" required>
-            <option value="resp1">Mourad Rahmani (Chantier A - Résidence Liège)</option>
-            <option value="resp2">Yacine Belkacem (Chantier B - Tour Annaba)</option>
+            <option value="naoufel">Meddeb Naoufel (Chantier A - Résidence Liège)</option>
+            <option value="hani">Meddeb Hani (Chantier B - Tour Annaba)</option>
           </select>
         </div>
         <div class="form-group">
@@ -454,8 +361,8 @@
         <div class="form-group">
           <label>Chantier & Chef assigné</label>
           <select id="newWorkerChantier" required>
-            <option value="Chantier A (Mourad)">Chantier A (Mourad Rahmani)</option>
-            <option value="Chantier B (Yacine)">Chantier B (Yacine Belkacem)</option>
+            <option value="Chantier A (Naoufel)">Chantier A — Meddeb Naoufel (Résidence Liège)</option>
+            <option value="Chantier B (Hani)">Chantier B — Meddeb Hani (Tour Annaba)</option>
           </select>
         </div>
         <div class="form-group">

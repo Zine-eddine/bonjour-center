@@ -181,17 +181,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Check Credentials for Director vs 2 Responsables
+    // Check Credentials for Director vs 2 Responsables (Meddeb Naoufel & Meddeb Hani)
     const cleanEmail = emailVal.toLowerCase().trim();
     let targetUrl = 'dashboard.html';
     let welcomeMsg = 'Bienvenue sur le portail LIÈGE';
 
-    if (cleanEmail === 'mourad@liege.com' || cleanEmail.includes('mourad')) {
-      targetUrl = 'responsable.html?user=mourad';
-      welcomeMsg = 'Bienvenue Mourad Rahmani (Chef Chantier A)';
-    } else if (cleanEmail === 'yacine@liege.com' || cleanEmail.includes('yacine')) {
-      targetUrl = 'responsable.html?user=yacine';
-      welcomeMsg = 'Bienvenue Yacine Belkacem (Chef Chantier B)';
+    if (cleanEmail === 'naoufel@liege.com' || cleanEmail.includes('naoufel') || cleanEmail.includes('mourad')) {
+      targetUrl = 'responsable.html?user=naoufel';
+      welcomeMsg = 'Bienvenue Meddeb Naoufel (Chef Chantier A)';
+    } else if (cleanEmail === 'hani@liege.com' || cleanEmail.includes('hani') || cleanEmail.includes('yacine')) {
+      targetUrl = 'responsable.html?user=hani';
+      welcomeMsg = 'Bienvenue Meddeb Hani (Chef Chantier B)';
     } else if (cleanEmail === 'admin@liege.com' || passVal === 'admin') {
       targetUrl = 'dashboard.html';
       welcomeMsg = 'Bienvenue M. le Directeur Général';
