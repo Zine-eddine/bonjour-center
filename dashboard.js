@@ -53,18 +53,19 @@ const state = {
   ]
 };
 
-// DOM Ready
+// DOM Ready with error safety
 document.addEventListener('DOMContentLoaded', () => {
-  initClock();
-  initTheme();
-  renderKPIs();
-  renderAttendanceTable();
-  setupEventListeners();
+  try { initTheme(); } catch (e) { console.warn(e); }
+  try { initClock(); } catch (e) { console.warn(e); }
+  try { renderKPIs(); } catch (e) { console.warn(e); }
+  try { renderAttendanceTable(); } catch (e) { console.warn(e); }
+  try { setupEventListeners(); } catch (e) { console.warn(e); }
 });
 
 // 1. Live Clock
 function initClock() {
   const clockEl = document.getElementById('liveClock');
+  if (!clockEl) return;
   function update() {
     const now = new Date();
     clockEl.textContent = now.toLocaleTimeString('fr-FR');
@@ -77,17 +78,24 @@ function initClock() {
 function initTheme() {
   const toggleBtn = document.getElementById('dashThemeToggle');
   const icon = document.getElementById('dashThemeIcon');
-  const saved = localStorage.getItem('liege_theme') || 'dark';
+  let saved = 'dark';
+  try {
+    saved = localStorage.getItem('liege_theme') || 'dark';
+  } catch (err) {
+    saved = 'dark';
+  }
   document.documentElement.setAttribute('data-theme', saved);
-  icon.className = saved === 'light' ? 'ph ph-sun' : 'ph ph-moon';
+  if (icon) icon.className = saved === 'light' ? 'ph ph-sun' : 'ph ph-moon';
 
-  toggleBtn.addEventListener('click', () => {
-    const curr = document.documentElement.getAttribute('data-theme') || 'dark';
-    const next = curr === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('liege_theme', next);
-    icon.className = next === 'light' ? 'ph ph-sun' : 'ph ph-moon';
-  });
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const curr = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = curr === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('liege_theme', next); } catch (e) {}
+      if (icon) icon.className = next === 'light' ? 'ph ph-sun' : 'ph ph-moon';
+    });
+  }
 }
 
 // 3. KPI Recalculation
@@ -350,7 +358,11 @@ function showToast(title, msg) {
   toastTimer = setTimeout(() => toast.classList.remove('active'), 4000);
 }
 
-// Number formatter
+// Number formatter with safe fallback for all phones
 function formatDZD(num) {
-  return new Intl.NumberFormat('fr-DZ').format(num) + ' DZD';
+  try {
+    return new Intl.NumberFormat('fr-DZ').format(num) + ' DZD';
+  } catch (e) {
+    return (num || 0).toLocaleString() + ' DZD';
+  }
 }

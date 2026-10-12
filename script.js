@@ -181,15 +181,30 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Always redirect to dashboard.html smoothly
+    // Check Credentials for Director vs 2 Responsables
+    const cleanEmail = emailVal.toLowerCase().trim();
+    let targetUrl = 'dashboard.html';
+    let welcomeMsg = 'Bienvenue sur le portail LIÈGE';
+
+    if (cleanEmail === 'mourad@liege.com' || cleanEmail.includes('mourad')) {
+      targetUrl = 'responsable.html?user=mourad';
+      welcomeMsg = 'Bienvenue Mourad Rahmani (Chef Chantier A)';
+    } else if (cleanEmail === 'yacine@liege.com' || cleanEmail.includes('yacine')) {
+      targetUrl = 'responsable.html?user=yacine';
+      welcomeMsg = 'Bienvenue Yacine Belkacem (Chef Chantier B)';
+    } else if (cleanEmail === 'admin@liege.com' || passVal === 'admin') {
+      targetUrl = 'dashboard.html';
+      welcomeMsg = 'Bienvenue M. le Directeur Général';
+    }
+
     try {
       await new Promise(r => setTimeout(r, 600));
       loginBtn.classList.remove('is-loading');
       loginBtn.disabled = false;
 
-      showHUDToast('Accès Autorisé', 'Redirection vers le tableau de bord...', false);
+      showHUDToast('Accès Autorisé', welcomeMsg, false);
       setTimeout(() => {
-        window.location.href = 'dashboard.html';
+        window.location.href = targetUrl;
       }, 700);
     } catch (err) {
       loginBtn.classList.remove('is-loading');

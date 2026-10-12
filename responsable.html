@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LIÈGE | Espace Chef de Chantier</title>
+
+  <!-- Google Fonts: Syne + Plus Jakarta Sans + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/fill/style.css">
+
+  <link rel="stylesheet" href="responsable.css">
+</head>
+<body>
+
+  <!-- Dynamic Cyber Atmosphere Background -->
+  <div class="resp-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-layer"></div>
+  </div>
+
+  <!-- Top Header Bar -->
+  <header class="top-nav">
+    <div class="brand-box">
+      <div class="brand-monogram">L</div>
+      <div class="brand-info">
+        <h1 class="brand-title">LIÈGE <span>CHANTIER</span></h1>
+        <p class="brand-sub" id="siteLabel">Chantier A &middot; Résidence Liège</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Live Clock -->
+      <div class="clock-badge">
+        <i class="ph-fill ph-clock"></i>
+        <span id="liveTime">--:--</span>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button class="icon-btn" id="themeToggle" title="Changer le thème">
+        <i class="ph ph-moon" id="themeIcon"></i>
+      </button>
+
+      <!-- Responsable Pill -->
+      <div class="user-pill">
+        <div class="user-avatar" id="userAvatar">MR</div>
+        <div class="user-meta">
+          <span class="user-name" id="userName">Mourad Rahmani</span>
+          <span class="user-role">Chef de Projet</span>
+        </div>
+        <button class="logout-btn" id="logoutBtn" title="Déconnexion">
+          <i class="ph ph-sign-out"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewport -->
+  <main class="main-shell">
+
+    <!-- Financial Status Card (Solde & Dépenses) -->
+    <section class="wallet-banner glass-glow">
+      <div class="wallet-left">
+        <div class="wallet-tag">
+          <i class="ph-fill ph-vault"></i> CAISSE EN MAIN (SOLDE DISPONIBLE)
+        </div>
+        <div class="wallet-amount" id="valRemaining">165,000 DZD</div>
+        <p class="wallet-note">Montant sous votre responsabilité directe</p>
+      </div>
+
+      <div class="wallet-breakdown">
+        <div class="break-item">
+          <span class="break-label">Reçu du Directeur (Sward)</span>
+          <span class="break-value text-cyan" id="valReceived">600,000 DZD</span>
+        </div>
+        <div class="break-item">
+          <span class="break-label">Dépensé en Matériaux (Sl3a)</span>
+          <span class="break-value text-orange" id="valMaterials">260,000 DZD</span>
+        </div>
+        <div class="break-item">
+          <span class="break-label">Payé aux Ouvriers (Khadama)</span>
+          <span class="break-value text-purple" id="valPayouts">175,000 DZD</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION TOOLBAR (Barre d'outils des 3 actions principales) -->
+    <section class="toolbar-section">
+      <h2 class="toolbar-title"><i class="ph-fill ph-lightning"></i> Barre d'Outils Rapide (Actions Terrain)</h2>
+      
+      <div class="tools-grid">
+        <!-- Action 1: Pointage -->
+        <button class="tool-card emerald" id="btnToolPointage">
+          <div class="tool-icon"><i class="ph-bold ph-calendar-check"></i></div>
+          <div class="tool-texts">
+            <h3>Pointer un Ouvrier</h3>
+            <p>Houdour, Ghiyab & Retard du jour</p>
+          </div>
+          <i class="ph ph-arrow-right tool-arrow"></i>
+        </button>
+
+        <!-- Action 2: Achat Matériaux -->
+        <button class="tool-card orange" id="btnToolAchat">
+          <div class="tool-icon"><i class="ph-bold ph-shopping-bag-open"></i></div>
+          <div class="tool-texts">
+            <h3>Acheter Matériaux (Sl3a)</h3>
+            <p>Ciment, briques, fer, sable, outillage</p>
+          </div>
+          <i class="ph ph-arrow-right tool-arrow"></i>
+        </button>
+
+        <!-- Action 3: Payer Ouvrier -->
+        <button class="tool-card purple" id="btnToolPaye">
+          <div class="tool-icon"><i class="ph-bold ph-hand-coins"></i></div>
+          <div class="tool-texts">
+            <h3>Payer un Ouvrier (Sward)</h3>
+            <p>Avance ou journée avec heure exacte</p>
+          </div>
+          <i class="ph ph-arrow-right tool-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- LIVE DATA TABS (Matériaux, Paiements, Ouvriers) -->
+    <section class="data-section glass-glow">
+      <div class="data-header">
+        <div class="tabs-nav">
+          <button class="tab-link active" data-tab="tab-materials">
+            <i class="ph-bold ph-cube"></i> Matériaux Achetés (<span id="countMaterials">3</span>)
+          </button>
+          <button class="tab-link" data-tab="tab-payouts">
+            <i class="ph-bold ph-hand-coins"></i> Paiements Ouvriers (<span id="countPayouts">3</span>)
+          </button>
+          <button class="tab-link" data-tab="tab-attendance">
+            <i class="ph-bold ph-users-three"></i> Pointage Présence (<span id="countWorkers">5</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 1: Matériaux -->
+      <div class="tab-panel active" id="tab-materials">
+        <div class="panel-list" id="materialsList">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Paiements Ouvriers -->
+      <div class="tab-panel" id="tab-payouts">
+        <div class="panel-list" id="payoutsList">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Tab 3: Pointage Présence -->
+      <div class="tab-panel" id="tab-attendance">
+        <div class="table-shell">
+          <table class="att-table">
+            <thead>
+              <tr>
+                <th>Ouvrier</th>
+                <th>Fonction</th>
+                <th>Arrivée</th>
+                <th>Statut</th>
+                <th>Action Rapide</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTableBody">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- MODAL 1: Achat Matériaux (Sl3a) -->
+  <div class="modal-backdrop" id="modalAchat">
+    <div class="modal-card glass-glow">
+      <div class="modal-head">
+        <h3><i class="ph-bold ph-shopping-cart"></i> Enregistrer Achat Matériau (Sl3a)</h3>
+        <button class="close-btn" onclick="closeModal('modalAchat')"><i class="ph ph-x"></i></button>
+      </div>
+      <form id="formAchat" class="modal-form">
+        <div class="f-group">
+          <label>Désignation du Matériau</label>
+          <input type="text" id="matName" placeholder="Ex: Ciment Chiffa 50 Sacs" required>
+        </div>
+        <div class="f-group">
+          <label>Fournisseur / Lieu d'Achat</label>
+          <input type="text" id="matSupplier" placeholder="Ex: Quincaillerie Centrale" required>
+        </div>
+        <div class="f-group">
+          <label>Montant Payé (DZD)</label>
+          <input type="number" id="matAmount" placeholder="Ex: 42000" min="100" step="100" required>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn-cancel" onclick="closeModal('modalAchat')">Annuler</button>
+          <button type="submit" class="btn-submit orange-btn">Valider & Déduire</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Paiement Ouvrier (Sward) -->
+  <div class="modal-backdrop" id="modalPaye">
+    <div class="modal-card glass-glow">
+      <div class="modal-head">
+        <h3><i class="ph-bold ph-hand-coins"></i> Verser de l'Argent à un Ouvrier</h3>
+        <button class="close-btn" onclick="closeModal('modalPaye')"><i class="ph ph-x"></i></button>
+      </div>
+      <form id="formPaye" class="modal-form">
+        <div class="f-group">
+          <label>Sélectionner l'Ouvrier</label>
+          <select id="payWorkerSelect" required>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Montant Versé Cash (DZD)</label>
+          <input type="number" id="payAmount" placeholder="Ex: 5000" min="500" step="500" required>
+        </div>
+        <div class="f-group">
+          <label>Motif de Paiement</label>
+          <input type="text" id="payNote" placeholder="Ex: Journée complète + heures supp" required>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn-cancel" onclick="closeModal('modalPaye')">Annuler</button>
+          <button type="submit" class="btn-submit purple-btn">Confirmer le Versement</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Pointage Présence Ouvrier -->
+  <div class="modal-backdrop" id="modalPointage">
+    <div class="modal-card glass-glow">
+      <div class="modal-head">
+        <h3><i class="ph-bold ph-calendar-check"></i> Pointage Présence (Houdour w Ghiyab)</h3>
+        <button class="close-btn" onclick="closeModal('modalPointage')"><i class="ph ph-x"></i></button>
+      </div>
+      <form id="formPointage" class="modal-form">
+        <div class="f-group">
+          <label>Ouvrier</label>
+          <select id="pointWorkerSelect" required>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Statut de Présence</label>
+          <select id="pointStatus" required>
+            <option value="present">Présent (Hader)</option>
+            <option value="late">En retard</option>
+            <option value="absent">Absent (Ghayeb)</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Heure de Pointage</label>
+          <input type="time" id="pointTime" value="07:30" required>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn-cancel" onclick="closeModal('modalPointage')">Annuler</button>
+          <button type="submit" class="btn-submit emerald-btn">Enregistrer Pointage</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="resp-toast" id="respToast">
+    <i class="ph-fill ph-check-circle" id="toastIcon"></i>
+    <div class="toast-body">
+      <h5 id="toastTitle">Notification</h5>
+      <p id="toastMsg">Opération effectuée avec succès.</p>
+    </div>
+  </div>
+
+  <script src="responsable.js"></script>
+</body>
+</html>
